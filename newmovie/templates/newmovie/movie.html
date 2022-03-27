@@ -1,0 +1,106 @@
+{% extends 'newmovie/main.html' %}
+{% load static %}
+{% block content %}
+<style>
+     .card{
+        display: inline-table;
+    }
+       .box {
+      position: relative;
+      text-align: center;
+      color: white;
+    }
+
+    .centered {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+    .text_top{
+        font-size: 30px;
+
+    }
+   .update:hover{background-color: #fff;color:blue;}
+	.delete:hover{background-color: #fff;color:red;}
+
+    .sarlavha{
+        margin:10px 0px 10px 50px;
+    }
+</style>
+     <div class="box">
+	<img style="width: 100%;" src="{% static 'images/main.jpg' %}" class="img-fluid " alt="...">
+        <div class="centered">
+            <p class="text_top text-light">Agar Menga o'xshab kinoning haqiqiy muxlisi bolsangiz va premyeralarni birinchilardan bolib tomowa qiliwni xoxlasangiz siz aynan to'g'ri manzilni tanladingiz</p>
+            <a href="{% url 'login' %}"><button type="button" class="btn btn-dark btn-lg">LogIn</button> </a>
+        </div>
+    </div>
+    <h3 class="sarlavha text-danger ">Eng so'nggi </h3>
+  {%for film in films %}
+
+
+
+        <div class="card" style="width: 18rem;">
+              <img src="{{film.image.url}}" class="card-img-top img-thumbnail" alt="...">
+              <div class="card-body">
+                <h5 class="card-title">{{film.title}}</h5>
+
+                <a href="{% url 'movie_id' film.id%}" class="btn btn-danger delete">See</a>
+              </div>
+       </div>
+
+
+{% endfor %}
+
+
+    <div class="pagination">
+        {% if films.has_previous %}
+            <a class="pagination-action" href="?page=1"><i class="fas fa-angle-double-left"></i></a>
+            <a class="pagination-action" href="?page={{films.previous_page_number}}"><i class="fas fa-angle-left"></i></a>
+        {% endif %}
+        {% for num in films.paginator.page_range %}
+            {% if films.number == num %}
+               <strong class="pagination-number pagination-current">{{num}}</strong>
+            {% elif num > films.number|add:'-2' and num < films.number|add:'2' %}
+        <a class="pagination-number" href="?page={{num}}">{{num}}</a>
+            {% endif %}
+        {% endfor %}
+            {% if films.has_next %}
+                <a class="pagination-action" href="?page={{films.next_page_number}}"><i class="fas fa-angle-right"></i></a>
+                <a class="pagination-action" href="?page={{films.paginator.num_pages}}"><i class="fas fa-angle-double-right"></i></a>
+
+            {% endif %}
+    </div>
+
+<style>
+    .pagination{
+        text-align: center;
+        margin: 1em;
+
+    }
+    .pagination-action{
+        margin: 0 0.1em;
+        display: inline-block;
+        padding: 0.5em;
+        color: #B9B9B9;
+        font-size: 1.3em;
+    }
+    .pagination-action:hover{
+        color: #970100;
+
+    }
+    .pagination-number{
+        background-color: #c04914;
+        margin-left: 5px;
+        padding: 0.7em 1em;
+        color: #fff;
+        border-radius: 2px;
+        text-decoration: none;
+
+    }
+    .pagination-number:hover, .pagination-current{
+        background-color: #970100;
+        color: #fff;
+    }
+</style>
+{% endblock %}

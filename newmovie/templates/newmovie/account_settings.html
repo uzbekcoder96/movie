@@ -1,0 +1,48 @@
+{%  extends 'newmovie/main.html' %}
+{% load static %}
+{% block content %}
+
+<style>
+	.profile-pic{
+		max-width: 200px;
+		max-height:200px;
+		margin: 0 auto;
+		border-radius: 50%;
+	}
+	.row{
+
+		margin:20px 40px;
+	}
+	.col-md-3{
+
+		margin-left: 240px;
+	}
+</style>
+
+<br>
+<div class="row">
+	<div class="col-md-3">
+		<div class="card card-body">
+			<a class="btn btn-danger" href="{% url 'home' %}"> &#8592; Back to Profile</a>
+			<hr>
+			<h3 style="text-align: center"><span style="font-size: 25px;color:#adda11">{{request.user}}</span> Profil Settings</h3>
+			<hr>
+			<img class="profile-pic" src="{{request.user.usermine.profile_pic.url}}" >
+
+		</div>
+	</div>
+	<div class="col-md-4">
+		<div class="card card-body">
+
+			<form method="POST" action="" enctype="multipart/form-data">
+				{% csrf_token %}
+				{{form.as_p}}
+			<input class="btn btn-primary update" type="submit" name="Update Information">
+			</form>
+		</div>
+	</div>
+</div>
+
+
+
+{% endblock %}

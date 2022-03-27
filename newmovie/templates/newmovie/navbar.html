@@ -1,0 +1,95 @@
+{% load static %}
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid">
+
+    <a href="{% url 'home' %}"><img id="logo" src="{% static 'images/2.png' %}"></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        {% if request.user.is_staff %}
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Home <i class="fas fa-home"></i></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'movie' %}">Movies <i class="fas fa-video"></i></a>
+        </li>
+
+        {% else %}
+        <li class="nav-item">
+          <a class="nav-link active" href="{% url 'accountsettings' %}">Settings <i class="fas fa-cog"></i></a>
+        </li>
+        {% endif %}
+        <li class="nav-item dropdown">
+          <a class="nav-link  dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Janrlar
+          </a>
+          <ul class="dropdown-menu btn-dark" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" href="{% url 'filter_movie_action' %}">Action</a></li>
+            <li><a class="dropdown-item" href="{% url 'filter_movie_drama' %}">Drama</a></li>
+            <li><a class="dropdown-item" href="{% url 'filter_movie_triller' %}">Triller</a></li>
+            <li><a class="dropdown-item" href="{% url 'filter_movie_comedy' %}">Comedy</a></li>
+          </ul>
+        </li>
+       <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Yillar
+          </a>
+          <ul class="dropdown-menu btn-dark" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" href="{% url 'filter_movie_2021' %}">2021</a></li>
+            <li><a class="dropdown-item" href="{% url 'filter_movie_2020' %}">2020</a></li>
+            <li><a class="dropdown-item" href="{% url 'filter_movie_2019' %}">2019</a></li>
+            <li><a class="dropdown-item" href="{% url 'filter_movie_2018' %}">2018</a></li>
+          </ul>
+        </li>
+          <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Eng...
+          </a>
+          <ul class="dropdown-menu btn-dark" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" href="{% url 'filter_movie_watched' %}">Ko'p ko'rilgan</a></li>
+            <li><a class="dropdown-item" href="{% url 'filter_movie_downloaded' %}">Yuklangan</a></li>
+            <li><a class="dropdown-item" href="{% url 'filter_movie_top_rank' %}">Reytingi baland</a></li>
+          </ul>
+        </li>
+      </ul>
+      <form class="d-flex" action="{% url 'search_bar' %}" method="POST">
+        {% csrf_token %}
+        <input name="search" class="form-control me-2" type="search" placeholder="Qidiruv.. " aria-label="Search">
+        <button  class=" btn btn-outline-primary update" type="submit">Qidiruv</button>
+      </form>
+      <p style="font-size: 15px;color: #fff; margin:0px 8px;">Hello <span style="font-size: 25px;color:#adda11">{{request.user}}</span></p>
+      <img class="picture" src="{{request.user.usermine.profile_pic.url}}" alt="error">
+      <span><a class="logout " style=""href="{% url 'logout' %}">LogOut</a></span>
+    </div>
+  </div>
+</nav>
+
+<style>
+    .btn:hover{background-color: #fff;color:red}
+
+    .logout{
+      background-color: red;
+      padding:8px 10px;
+      border: 1px solid red;
+      border-radius: 10%;
+      font-size: 15px;
+      color: white;
+      margin:0px 8px;
+      text-decoration:none;
+    }
+    .logout:hover{
+      background-color: white;
+      color: red;
+      transition-duration: 0.4s;
+    }
+    .picture{
+		max-width: 40px;
+		max-height:40px;
+
+		border-radius: 50%;
+	}
+    .update:hover{background-color: #fff;color:blue;}
+	.delete:hover{background-color: #fff;color:red;}
+</style>

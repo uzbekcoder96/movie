@@ -1,0 +1,29 @@
+{% extends 'newmovie/main.html' %}
+<style>
+    .update:hover{background-color: #fff;color:blue;}
+	.delete:hover{background-color: #fff;color:red;}
+</style>
+{% block content %}
+<center>
+    <div  class="card mb-3" style=" width: 1400px;">
+  <div class="row g-0">
+    <div class="col-md-4">
+      <img src="{{film_id.image.url}}" class="img-fluid rounded-start" alt="...">
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h1 class="card-title btn-danger ">{{film_id.title}}</h1>
+        <p style="font-size:20px" class="card-text">{{film_id.description}}<</p>
+        <p style="font-size:30px" ></p>
+        <p  style="font-size:30px"></p>
+        <p style="font-size:30px" ></p>
+        <video style="border-left: 2px solid silver ;border-radius: 5px;" width="800" height="800"
+               src="{{ MEDIA_URL }}{{film_id.video.url}}#t=1.2"  type='video/mp4' controls ></video>
+      </div>
+    </div>
+  </div>
+</div>
+
+</center>
+
+{% endblock %}

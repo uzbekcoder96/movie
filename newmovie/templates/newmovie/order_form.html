@@ -1,0 +1,19 @@
+{% extends 'newmovie/main.html' %}
+{% load static %}
+{% block content %}
+
+<div style="margin:10px 50px;" class="row">
+	<div style="background-color:#8a6749; margin:10px 400px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.8), 0 6px 20px 0 rgba(0, 0, 0, 0.19);" class="col-md-6">
+        <div style="background-color:#8a6749; color:#fff;" class="card card-body">
+            <form method="POST" action="" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{form.as_p}}
+                <input type="submit" name="Submit">
+            </form>
+
+
+
+       </div>
+    </div>
+</div>
+{% endblock %}

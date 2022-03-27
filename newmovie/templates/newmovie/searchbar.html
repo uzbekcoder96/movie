@@ -1,0 +1,31 @@
+{% extends 'newmovie/main.html' %}
+{% load static %}
+{% block content %}
+<style>
+     .card{
+        display: inline-table;
+    }
+</style>
+    {% if search %}
+
+        {% for film in result %}
+                    <div class="card" style="width: 18rem;">
+              <img src="{{film.image.url}}" class="card-img-top img-thumbnail" alt="...">
+              <div class="card-body">
+                <h5 class="card-title">{{film.title}}</h5>
+
+                <a href="{% url 'movie_id' film.id%}" class="btn btn-danger">See</a>
+              </div>
+       </div>
+        {% endfor %}
+
+    {% else %}
+           <h1>Error</h1>
+    {% endif %}
+
+
+
+
+
+
+{% endblock %}

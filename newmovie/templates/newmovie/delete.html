@@ -1,0 +1,31 @@
+{% extends 'newmovie/main.html' %}
+{% load static %}
+{% block content %}
+<style>
+     .btn:hover{
+        background-color: white;
+        color: #017b92;
+        margin-left: 5px;
+    }
+</style>
+<center>
+<br>
+<div style="margin-bottom:20px;" class="row">
+	<div style="margin-left: 400px;background-color:#017b92;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.8), 0 6px 20px 0 rgba(0, 0, 0, 0.19);" class="col-md-6">
+        <div style="background-color:#017b92; color:#fff;" class="card card-body">
+            <p>Are you sure you want to delete <span style="color: #fbf1d0;">"{{movie}}"</span> </p>
+
+            <form action="{% url 'delete_movie' movie.id%}" method="POST">
+              {% csrf_token %}
+
+              <a   class= "btn btn-sm btn-primary" href="{% url 'home' %}">Cancel</a>
+
+              <input class= "btn btn-sm btn-danger" type="submit" name="confirm">
+            </form>
+
+        </div>
+    </div>
+</div>
+</center>
+
+{% endblock %}

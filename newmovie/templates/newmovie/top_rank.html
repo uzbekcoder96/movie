@@ -1,0 +1,35 @@
+
+
+{% extends 'newmovie/main.html' %}
+
+{% block content %}
+<style>
+     .card{
+        display: inline-table;
+        margin-left: 40px;
+    }
+
+
+     .update:hover{background-color: #fff;color:blue;}
+	.delete:hover{background-color: #fff;color:red;}
+    .sarlavha{
+        margin:10px 0px 10px 50px;
+    }
+</style>
+
+
+<h3 class="sarlavha text-danger ">Top Films</h3>
+
+
+{% for film in top_rank %}
+
+        <div class="card" style="width: 18rem; ">
+              <img src="{{film.image.url}}" class="card-img-top img-thumbnail" alt="...">
+              <div class="card-body">
+                <h5 class="card-title">{{film.title}}</h5>
+
+                <a href="{% url 'movie_id' film.id%}" class="btn btn-danger delete">See</a>
+              </div>
+        </div>
+{% endfor %}
+{% endblock %}

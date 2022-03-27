@@ -1,0 +1,81 @@
+{% extends 'newmovie/main.html' %}
+{% block content %}
+<style>
+  #users, #addmovie {
+    margin-left: 400px;
+  }
+   #movies {
+    margin-left: 300px;
+    margin-bottom: 50px;
+  }
+   #sar{
+    margin-top: 40px;
+
+   	margin-left: 100px;
+   }
+
+
+</style>
+
+
+{% include 'newmovie/status.html' %}
+<br>
+
+<div class="row">
+	<div id="users" class="col-md-6">
+		<h5>USERS:</h5>
+		<hr>
+		<div class="card card-body">
+
+			<table class="table table-sm">
+				<tr>
+					<th></th>
+					<th>User</th>
+					<th>Phone</th>
+                    <th>Email</th>
+				</tr>
+					{% for user in users %}
+					<tr>
+
+
+						<td><a  class= "btn btn-sm btn-primary update" href="{% url 'user' user.id %}">View</a></td>
+
+						<td>{{user.name}}</td>
+						<td>{{user.phone}}</td>
+						<td>{{user.email}}</td>
+
+					</tr>
+					{% endfor %}
+			</table>
+		</div>
+	</div>
+
+	<div id="movies" class="col-md-7">
+		<h5 id="sar">LAST Added Movies</h5>
+		<hr>
+		<div class="card card-body">
+			<a class="btn btn-primary  btn-sm btn-block update" href="{% url 'add_movie' %}">ADD NEW MOVIE</a>
+			<table class="table table-sm">
+				<tr>
+					<th>Title</th>
+					<th>Date Added</th>
+					<th>Status</th>
+					<th>Update</th>
+					<th>Remove</th>
+				</tr>
+				{% for movie in movies %}
+					<tr>
+						<td>{{movie.title}}</td>
+						<td>{{movie.date_created}}</td>
+						<td>{{movie.status}}</td>
+						<td><a class= "btn btn-sm btn-primary update" href="{% url 'update_movie' movie.id%}">Update</a></td>
+						<td><a class= "btn btn-sm btn-danger delete" href="{% url 'delete_movie' movie.id%} ">Delete</a></td>
+					</tr>
+				{% endfor %}
+			</table>
+		</div>
+	</div>
+
+</div>
+
+{% endblock %}
